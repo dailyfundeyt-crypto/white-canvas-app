@@ -20,7 +20,7 @@ const COLORS = [
   "oklch(0.577 0.245 27.325)",
   "oklch(0.646 0.222 41.116)",
   "oklch(0.398 0.07 227.392)",
-  "oklch(0.6 0.118 184.704)",
+  "oklch(0.6 0.118 184.704,704)",
   "oklch(0.769 0.188 70.08)",
 ];
 
@@ -146,4 +146,69 @@ function CanvasPage() {
         <canvas
           ref={canvasRef}
           onPointerDown={startDrawing}
-```
+          onPointerMove={draw}
+          onPointerUp={stopDrawing}
+          onPointerLeave={stopDrawing}
+          onPointerCancel={stopDrawing}
+          className="absolute inset-0 touch-none"
+          style={{ touchAction: "none" }}
+          aria-label="Drawing canvas"
+        />
+      </div>
+
+      <div className="shrink-0 border-t border-border bg-card px-4 pb-safe pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            {COLORS.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setColor(c)}
+                className={`h-8 w-8 rounded-full border-2 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  color === c
+                    ? "border-primary scale-110"
+                    : "border-transparent"
+                }`}
+                style={{ backgroundColor: c }}
+                aria-label={`Select color ${c}`}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <label className="flex flex-col items-center gap-1">
+              <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                Size
+              </span>
+              <input
+                type="range"
+                min={1}
+                max={20}
+                value={lineWidth}
+                onChange={(e) => setLineWidth(Number(e.target.value))}
+                className="h-1 w-24 cursor-pointer appearance-none rounded bg-muted accent-primary"
+                aria-label="Brush size"
+              />
+            </label>
+
+            <button
+              type="button"
+              onClick={clearCanvas}
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              onClick={downloadCanvas}
+              className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
