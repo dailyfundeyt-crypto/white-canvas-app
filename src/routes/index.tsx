@@ -30,7 +30,7 @@ function CanvasPage() {
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const drawingRef = useRef(false);
 
-  const [color, setColor] = useState<string>(COLORS[0]);
+  const [color, setColor] = useState<string>(COLORS[0]!);
   const [lineWidth, setLineWidth] = useState(3);
 
   useEffect(() => {
