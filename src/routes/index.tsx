@@ -15,12 +15,12 @@ export const Route = createFileRoute("/")({
   component: CanvasPage,
 });
 
-const COLORS = [
+const COLORS: string[] = [
   "oklch(0.129 0.042 264.695)",
   "oklch(0.577 0.245 27.325)",
   "oklch(0.646 0.222 41.116)",
   "oklch(0.398 0.07 227.392)",
-  "oklch(0.6 0.118 184.704,704)",
+  "oklch(0.6 0.118 184.704)",
   "oklch(0.769 0.188 70.08)",
 ];
 
